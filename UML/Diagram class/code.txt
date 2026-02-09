@@ -1,0 +1,72 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class User {
+  #id : int
+  #name : string
+  #email : string
+  #email_verified_at
+  #password : string
+  +register() bool
+}
+
+class Restaurant {
+  -id : int
+  -name : string
+  -city : string
+  -cuisine_type : string
+  -adress : string
+  -capacity : int
+  -openhours : float
+  -closehours : float
+  +addRestaurant()
+  +removeRestaurant()
+  +editRestaurant()
+}
+
+class images {
+  -id : int
+  -restuarant_image : string
+}
+
+class menu {
+  -id : int
+}
+
+class menuplats {
+  -id : int
+}
+class plat {
+  -id : int
+  -content : string
+  -prix_uni : int
+}
+
+class favorites {
+  -id : int
+  -favorites_date : date
+}
+
+class Role {
+  -id : int
+  -Role : varchar(50)
+}
+
+
+' Inheritance (logical roles)
+User <|-- Customer
+User <|-- RestaurantOwner
+User <|-- Administrator
+
+
+' Relationships
+RestaurantOwner "1" -- "1..*" Restaurant
+images "1..*" -- "1" Restaurant
+menu "0..*" -- "1" Restaurant
+favorites "0..*" -- "1" Restaurant
+favorites "0..*" -- "1" Customer
+User "1" -- "1..2" Role
+menu "1" -- "0..*" menuplats
+plat "1" -- "0..*" menuplats
+
+@enduml

@@ -1,142 +1,137 @@
-🍽️ Restaurant Reservation Management System
-📌 Project Overview
+# 🍽️ Youco'Done
 
-This project is a restaurant reservation management platform that allows customers to reserve tables online while giving restaurateurs and administrators tools to manage availability, reservations, payments, notifications, and statistics.
+Youco'Done is a web platform that allows users to **book tables in restaurants in just a few clicks**, while providing restaurateurs with a simple and efficient space to **publish, manage, and track reservations**.
 
-The application follows an MVC architecture and integrates scheduling, secure payment processing, email confirmations, and analytics dashboards.
+This project focuses on building the **functional foundations** of the platform, including authentication, restaurant management, search, and role-based access control.
 
-🎯 Features
-👤 Customer Features
+---
 
-📅 Interactive Reservation Calendar
+## 🎯 Project Objectives
 
-Select date and time slot easily.
+* Provide a secure authentication system for all users
+* Allow restaurant owners to manage their restaurants
+* Enable customers to search and book restaurants easily
+* Give administrators full control over the platform
+* Implement roles and permissions with best practices
 
-View only available booking slots.
+---
 
-💳 Secure Online Payment
+## 👥 User Roles
 
-Pay deposit or full reservation.
+* **Customer**: Search restaurants, view details, add favorites, book tables
+* **Restaurant Owner**: Create, update, and manage their own restaurants
+* **Administrator**: Manage users, restaurants, and platform statistics
 
-Stripe or PayPal (test mode).
+---
 
-📧 Confirmation & Invoice
+## 📖 User Stories
 
-Confirmation email after payment.
+### Authentication & Profile
 
-Reservation details included.
+* 🍽️ As a user, I can register and authenticate securely
+* 👤 As a user, I can view and edit my personal profile
 
-Optional invoice download (FPDF).
+### Restaurant Owner
 
-🍴 Restaurateur Features
+* 🏠 Publish a restaurant with full details (name, city, cuisine, capacity, hours, photos, menus)
+* 🛠️ Edit or delete my own restaurants
 
-🗓️ Availability Management
+### Customer
 
-Define service hours.
+* 🔍 Search restaurants by city, cuisine, time slot, or name
+* 📄 View restaurant details (menus, photos, reviews, availability)
+* ⭐ Add restaurants to favorites
 
-Exceptional closures.
+### Administrator
 
-Fully booked slot management.
+* 🗑️ Delete any restaurant
+* 📊 View dashboard statistics (number of active restaurants)
+* 👮 Manage roles and permissions
 
-🔔 Reservation Notifications
+---
 
-Email alerts or dashboard notifications for new bookings.
+## ⚙️ Technical Features
 
-🛠️ Administrator Features
+* ✅ Secure authentication using **Laravel Breeze** or **Jetstream**
+* ✅ Full **CRUD** for restaurants
+* ✅ Advanced search system:
 
-📊 Dynamic Dashboard
+  * City
+  * Cuisine type
+  * Opening hours
+  * Restaurant name
+* ✅ User profile management
+* ✅ Role & permission management using **Spatie Laravel Permission** or **Gates/Policies**
+* ✅ Responsive UI for all roles (Customer / Owner / Admin)
 
-Track reservations and payments.
+---
 
-Statistics including:
+## 🔐 Roles & Permissions Rules
 
-Top restaurants.
+* Restaurant owners can **only manage their own restaurants**
+* Customers can **only book for themselves**
+* Administrators have **full access and control** over the platform
 
-Peak reservation hours.
+---
 
-Confirmed bookings.
+## 🛠️ Tech Stack
 
-🔍 Restaurants by City
+* **Backend**: Laravel
+* **Authentication**: Laravel Breeze / Jetstream
+* **Authorization**: Spatie Laravel Permission
+* **Database**: MySQL / PostgreSQL
+* **Frontend**: Blade + Tailwind CSS
 
-Display number of restaurants per city using Laravel Query Builder only (no Eloquent).
+---
 
-🧱 Tech Stack
-Backend
+## 🚀 Installation
 
-PHP / Laravel
+```bash
+# Clone the repository
+git clone https://github.com/your-username/youcodone.git
 
-MVC Architecture
-
-PDO Database Access
-
-Query Builder & Eloquent ORM
-
-Frontend
-
-HTML / Tailwind CSS
-
-JavaScript (calendar interaction)
-
-Payment & Notifications
-
-Stripe / PayPal (test mode)
-
-Email notifications
-
-Additional Tools
-
-FPDF (invoice generation)
-
-⚙️ Installation
-Clone repository
-git clone https://github.com/your-username/restaurant-reservation.git
-cd restaurant-reservation
-
-Install dependencies
+# Install dependencies
 composer install
-npm install
+npm install && npm run dev
 
-Environment setup
+# Environment setup
 cp .env.example .env
 php artisan key:generate
 
+# Run migrations and seeders
+php artisan migrate --seed
 
-Update .env with:
-
-Database credentials
-
-Mail configuration
-
-Stripe/PayPal test keys
-
-Run migrations
-php artisan migrate
-
-Start development server
+# Start the server
 php artisan serve
+```
 
-🗄️ Database Structure (Overview)
+---
 
-Users (customers, restaurateurs, administrators)
+## 📊 Admin Dashboard
 
-Restaurants
+The admin dashboard displays:
 
-Reservations
+* Total number of active restaurants
+* User management access
+* Restaurant moderation tools
 
-Payments
+---
 
-Availability schedules
+## 📌 Project Constraints
 
-📈 Future Improvements
+⚠️ Any non-compliance with the specifications or delay in delivery on **Simplonline** will automatically invalidate all skills related to this brief.
 
-SMS notifications
+---
 
-Advanced analytics dashboard
+## ✨ Future Improvements
 
-Mobile UI optimization
+* Online table booking with time slots
+* Reviews and ratings system
+* Notifications (email / in-app)
+* Payment integration
 
-Multi-language support
+---
 
-👨‍💻 Author
+## 📄 License
 
-Restaurant reservation management system project.
+This project is for educational purposes only.
