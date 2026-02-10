@@ -19,7 +19,7 @@ class RestaurantController extends Controller
 
     public function addRestaurant(Request $request)
     {
-
+        
         $data = $request->validate([
             'name' => 'required|max:255',
             'city' => 'required|max:255',
@@ -50,9 +50,9 @@ class RestaurantController extends Controller
         $imageName = time() . '.' . $image->extension();
 
         $image->storeAs('restaurants', $imageName, 'public');
-
+   
         Images::create([
-            'restuarant_image' => $imageName,
+            'restaurant_image' => $imageName,
             'restaurants_id' => $inserted->id
         ]);
      
@@ -101,14 +101,14 @@ class RestaurantController extends Controller
 
         $menu = new Menuses();
         $menuss = DB::table('menuses as m')
-                                ->join('menuplats as mp', 'mp.menus_id', '=', 'm.id')
+                                ->join('menuplats as mp', 'mp.menuses_id', '=', 'm.id')
                                 ->join('plats as p', 'p.id', '=', 'mp.plats_id')
                                 ->where('m.restaurants_id', $id)
                                 ->select('m.*', 'p.*')
                                 ->get();
 
         
-        return View('Restaurant.details', compact('data', 'menuss'));
+        return View('Restaurant.details', compact('data', 'menuss', 'id'));
     }
 
 }

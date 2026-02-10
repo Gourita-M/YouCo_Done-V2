@@ -14,7 +14,7 @@ class FavoritesController extends Controller
     {
         $Favorites = new Favorites();
         $data = DB::table('favorites as f')
-                    ->join('restaurants as r', 'r.id', '=', 'f.restaurant_id')
+                    ->join('restaurants as r', 'r.id', '=', 'f.restaurants_id')
                     ->where('f.users_id', Auth::id())
                     ->get();
 

@@ -78,7 +78,7 @@
     <!-- Restaurant Card -->
     @foreach($data as $dada)
     <div class="bg-white rounded-2xl shadow hover:shadow-lg transition overflow-hidden">
-      <img src="{{ asset('storage/restaurants/' . $dada->images[0]->restuarant_image) }} "
+      <img src="{{ asset('storage/restaurants/' . $dada->images[0]->restaurant_image) }} "
            class="h-48 w-full object-cover">
 
       <div class="p-5">

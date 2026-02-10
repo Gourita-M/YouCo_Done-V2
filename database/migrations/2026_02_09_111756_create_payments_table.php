@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('restaurant_image');
-            $table->foreignId('restaurants_id')
+            $table->decimal('amount');
+            $table->string('method');
+            $table->boolean('status');
+            $table->dateTime('payment_date');
+            $table->foreignId('reservations_id')
                     ->constrained()
                     ->cascadeOnDelete();
         });
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('payment');
     }
 };

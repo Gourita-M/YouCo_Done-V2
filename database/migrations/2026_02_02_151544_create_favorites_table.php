@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('favorites', function (Blueprint $table) {
             $table->id();
             $table->date('favorites_date');
-            $table->foreignId('restaurant_id')
+            $table->foreignId('restaurants_id')
             ->constrained()->cascadeOnDelete();
             $table->foreignId('users_id')
             ->constrained()->cascadeOnDelete();

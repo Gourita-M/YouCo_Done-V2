@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PlatsController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReservationsController;
 
 
 Route::get('/', function () {
@@ -40,7 +41,8 @@ Route::get('/details/{id}', [RestaurantController::class, 'restaurantDetails']);
 
 Route::post('/AddToFavourite', [FavoritesController::class, 'addToFavourite'])->name('favourite.add');
 
-Route::get('/Favorites', [FavoritesController::class, 'index']);
+Route::get('/Favorites', [FavoritesController::class, 'index'])->middleware(['auth']);
+
 
 Route::get('/admin/dashboard', function () {
     return view('admindashboard');
@@ -50,3 +52,8 @@ Route::get('/owner/dashboard', function () {
     return view('ownerdashboard');
 })->middleware(['auth','role:owner']);
 
+Route::get('/Reservation/{id}', [ReservationsController::class, 'index'])
+  ->middleware(['auth']);
+
+Route::post('/AddReservation/{id}',[ReservationsController::class, ('addReservation')])->name('add.Reservation')
+  ->middleware(['auth']);

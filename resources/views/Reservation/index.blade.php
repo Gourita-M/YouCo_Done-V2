@@ -1,19 +1,15 @@
-<?= $id ?>
+<?= $data ?>
+<?= $open ?>
+<?= $close ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Restaurant Details – TableBooky</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservation</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Poppins', sans-serif; }
-  </style>
 </head>
-
-<body class="bg-gray-50 text-gray-800">
-
+<body>
 <header class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
        <a href="../">
@@ -64,86 +60,58 @@
     </div>
   </header>
 
-<section class="max-w-6xl mx-auto px-6 py-10">
+<div class="bg-gray-100 min-h-screen flex items-center justify-center">
 
-  <div class="bg-white rounded-2xl shadow overflow-hidden">
 
-    <img src="{{ asset('storage/restaurants/' . $data->images[0]['restaurant_image'])}}"
-         class="w-full h-64 object-cover">
+<div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl">
+<div class="mb-6 text-center">
+<img src="{{ asset('storage/restaurants/' . ($data->images[0]->restaurant_image ?? 'default.jpg')) }}" alt="Restaurant" class="w-full h-40 object-cover rounded-xl mb-3" />
+<h1 class="text-2xl font-bold">{{$data->name}}</h1>
+<p class="text-gray-500">{{$data->city}} • {{$data->cuisine_type}}</p>
+</div>
 
-    <div class="p-6">
+<br><br>
 
-        <div class="flex gap-80">
-            <h2 class="text-3xl font-bold mb-2">{{$data['name']}}</h2>
-            <form action="{{ route('favourite.add') }}" method="POST">
-            @csrf
-                <input name="restaurentid" type="hidden" value="{{$data['id']}}">
-                <button class="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-xl hover:bg-red-600">
-                    ❤️ Add to Favourite
-                </button>
-            </form>
-        </div>
-      <a href="/Reservation/{{$id}}" class="flex items-center justify-center w-40 gap-2 px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 m-10">
-                    Reserve
-      </a>
+<form method="POST" action="{{Route('add.Reservation', [$data->id])}}">
+@csrf
 
-      <p class="text-gray-500 mb-4">
-        {{$data['cuisine_type']}} Cuisine • {{$data['city']}} • 
-      </p>
-      <p><span class="font-semibold">Adress : </span>{{$data['adress']}}</p><br>
+<div class="mb-6">
+    <label class="block mb-2 font-semibold">Select Time Slot</label>
 
-      <div class="grid md:grid-cols-3 gap-4 text-sm">
+    <div class="grid grid-cols-3 gap-3">
+        @for ($hour = $open; $hour <= $close; $hour++)
+            <label class="cursor-pointer">
+                <input type="radio" name="timeslot" 
+                       value="{{ $hour . ':00'}}"
+                       class="hidden peer">
 
-        <div>
-          <span class="font-semibold">Open:</span> {{$data['openhours']}} AM
-        </div>
-
-        <div>
-          <span class="font-semibold">Close:</span> {{$data['closehours']}} PM
-        </div>
-
-        <div>
-          <span class="font-semibold">Capacity:</span> {{$data['capacity']}} People
-        </div>
-
-      </div>
-
+                <div class="border rounded-lg py-2 text-center
+                            peer-checked:bg-blue-500
+                            peer-checked:text-white
+                            hover:bg-blue-100">
+                    {{ $hour . ':00'}}
+                </div>
+            </label>
+        @endfor
     </div>
+</div>
 
-  </div>
+<div class="mb-6">
+<label class="block mb-2 font-semibold">Number of Guests</label>
+<input name="amount" type="number" min="1" placeholder="2" class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none" required/>
+</div>
 
-</section>
 
-<section class="max-w-6xl mx-auto px-6 pb-16">
+<button class="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-600 transition">
+Confirm Reservation
+</button>
+</form>
+</div>
 
-  <h3 class="text-2xl font-semibold mb-6">Menus</h3>
 
-  <div class="bg-white rounded-xl shadow p-6 mb-8">
+</div>
 
-    <h4 class="text-xl font-semibold mb-4 text-orange-500">
-      {{$data->menuses[0]['title']}} Menu
-    </h4>
-
-    <div class="grid md:grid-cols-2 gap-6">
-    @foreach($menuss as $hahooowaaa)
-      <div class="border rounded-lg p-4 hover:shadow transition">
-        <h5 class="font-semibold">{{$hahooowaaa->content}}</h5>
-        <span class="text-orange-500 font-semibold">
-          {{$hahooowaaa->prize}} DH
-        </span>
-      </div>
-    @endforeach
-    </div>
-
-  </div>
-
-</section>
-
-<footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm">
-  © 2026 TableBooky — All rights reserved
-</footer>
-
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('userMenuBtn');
       const dropdown = document.getElementById('userDropdown');
@@ -175,5 +143,6 @@
       });
     });
   </script>
+</div>
 </body>
 </html>

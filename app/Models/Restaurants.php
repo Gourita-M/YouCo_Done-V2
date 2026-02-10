@@ -21,6 +21,7 @@ class Restaurants extends Model
         'openhours',
         'closehours',
         'users_id',
+        'available_p',
     ];
 
     public function images()

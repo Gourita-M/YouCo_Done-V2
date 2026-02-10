@@ -14,7 +14,7 @@ class PlatsController extends Controller
         foreach($request['plats'] as $pla){
             $menuplats = new Menuplats();
             $menuplats->create([
-                'menus_id' => $request['menutid'],
+                'menuses_id' => $request['menutid'],
                 'plats_id' => $pla,
             ]);
         }

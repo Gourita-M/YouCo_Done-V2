@@ -13,7 +13,7 @@ class Menuplats extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'menus_id',
+        'menuses_id',
         'plats_id',
     ];
 
