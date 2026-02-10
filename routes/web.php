@@ -57,3 +57,5 @@ Route::get('/Reservation/{id}', [ReservationsController::class, 'index'])
 
 Route::post('/AddReservation/{id}',[ReservationsController::class, ('addReservation')])->name('add.Reservation')
   ->middleware(['auth']);
+
+Route::get('/Reserved', [ReservationsController::class, 'showReservations'])->middleware(['auth']);

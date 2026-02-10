@@ -82,7 +82,7 @@
         @for ($hour = $open; $hour <= $close; $hour++)
             <label class="cursor-pointer">
                 <input type="radio" name="timeslot" 
-                       value="{{ $hour . ':00'}}"
+                       value="{{ $hour . ':00:00'}}"
                        class="hidden peer">
 
                 <div class="border rounded-lg py-2 text-center

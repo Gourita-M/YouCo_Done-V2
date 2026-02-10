@@ -29,14 +29,21 @@ class ReservationsController extends Controller
             'amount' => 'required',
             'timeslot' => 'required',
             ]);
-
+        
         Reservations::Create([
             'date' => Carbon::now()->toDateString(),
             'time_slot' => $data['timeslot'],
             'status' => 1,
-            'total_price' => 200,
+            'total_price' => 0,
             'users_id' => Auth::user()->id,
         ]);
+        
+        return Redirect('/Reserved');
 
+    }
+
+    public function showReservations()
+    {
+        return View('Reservation.Reserved');
     }
 }
