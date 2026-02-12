@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PayPalController;
 
 
 Route::get('/', function () {
@@ -62,3 +63,7 @@ Route::post('/AddReservation/{id}',[ReservationsController::class, ('addReservat
 Route::get('/Reserved', [ReservationsController::class, 'showReservations'])->middleware(['auth']);
 
 Route::get('/Payment/{id}',[PaymentController::class, 'index'])->middleware(['auth']);
+
+Route::get('paypal/pay', [App\Http\Controllers\PayPalController::class, 'createPayment'])->name('paypal.pay');
+Route::get('paypal/success', [App\Http\Controllers\PayPalController::class, 'success'])->name('paypal.success');
+Route::get('paypal/cancel', [App\Http\Controllers\PayPalController::class, 'cancel'])->name('paypal.cancel');

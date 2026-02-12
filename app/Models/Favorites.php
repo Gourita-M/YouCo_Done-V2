@@ -14,7 +14,7 @@ class Favorites extends Model
 
     protected $fillable = [
         'favorites_date',
-        'restaurant_id',
+        'restaurants_id',
         'users_id',
     ];
 

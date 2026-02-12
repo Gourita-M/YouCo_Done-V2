@@ -26,7 +26,7 @@ class FavoritesController extends Controller
         $favorites = new Favorites();
         $favorites->create([
             'favorites_date' => now(),
-            'restaurant_id' => $request['restaurentid'],
+            'restaurants_id' => $request['restaurentid'],
             'users_id' => Auth::user()->id,
         ]);
 

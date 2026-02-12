@@ -19,10 +19,9 @@
       <h1 class="text-2xl font-bold text-orange-500">TableBooky</h1>
 
       <nav class="hidden md:flex gap-8 text-sm font-medium">
-        <a href="/dashboard" class="hover:text-orange-500">Dashboard</a>
         <a href="/Restaurants" class="hover:text-orange-500">Restaurants</a>
         <a href="/Favorites" class="hover:text-orange-500">My Favorites</a>
-        <a href="#" class="hover:text-orange-500">Contact</a>
+         <a href="/Reserved" class="hover:text-orange-500 transition">Reservations</a>
       </nav>
       @if(Auth::user())
       <div class="flex items-center gap-3">

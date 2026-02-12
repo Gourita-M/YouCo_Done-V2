@@ -26,7 +26,7 @@
       <nav class="hidden md:flex gap-8 text-sm font-medium">
       <a href="/Restaurants" class="hover:text-orange-500">Restaurants</a>
         <a href="/Favorites" class="hover:text-orange-500">My Favorites</a>
-        <a href="#" class="hover:text-orange-500">Contact</a>
+        <a href="/Reserved" class="hover:text-orange-500 transition">Reservations</a>
       </nav>
       @if(Auth::user())
       <div class="flex items-center gap-3">

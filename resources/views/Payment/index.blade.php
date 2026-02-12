@@ -66,7 +66,7 @@
         </div>
 
         <!-- PayPal Button -->
-        <form action="" method="POST">
+        <form action="{{ Route('paypal.pay')}}" method="get">
             @csrf
             <button
                 class="w-full bg-yellow-400 hover:bg-yellow-500 
