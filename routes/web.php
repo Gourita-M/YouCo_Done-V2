@@ -64,6 +64,6 @@ Route::get('/Reserved', [ReservationsController::class, 'showReservations'])->mi
 
 Route::get('/Payment/{id}',[PaymentController::class, 'index'])->middleware(['auth']);
 
-Route::get('paypal/pay', [App\Http\Controllers\PayPalController::class, 'createPayment'])->name('paypal.pay');
+Route::get('paypal/pay/{id}', [App\Http\Controllers\PayPalController::class, 'createPayment'])->name('paypal.pay');
 Route::get('paypal/success', [App\Http\Controllers\PayPalController::class, 'success'])->name('paypal.success');
 Route::get('paypal/cancel', [App\Http\Controllers\PayPalController::class, 'cancel'])->name('paypal.cancel');
