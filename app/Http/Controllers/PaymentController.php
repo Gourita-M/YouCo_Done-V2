@@ -16,7 +16,7 @@ class PaymentController extends Controller
         $Reservation = DB::table('reservations')
                     ->join('restaurants', 'reservations.restaurants_id', '=', 'restaurants.id')
                     ->join('users', 'reservations.users_id','=','users.id')
-                    ->select('reservations.*','restaurants.name', 'users.name')
+                    ->select('reservations.*','restaurants.name as res', 'users.name')
                     ->where('reservations.id', $id)->first();
         return View('Payment.index', Compact('Reservation'));
     }
