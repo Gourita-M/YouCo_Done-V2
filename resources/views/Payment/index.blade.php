@@ -1,4 +1,3 @@
-<?php print_r($Reservation) ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,8 @@
   <title>Reservation Payment</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body>
+<div class="bg-gray-100 min-h-screen flex items-center justify-center">
 
   <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-xl">
     <h1 class="text-2xl font-bold mb-6 text-center">
@@ -17,25 +17,17 @@
     <!-- Reservation Summary -->
     <div class="border rounded-xl p-4 mb-6 bg-gray-50">
       <p class="font-semibold mb-2">Booking Summary</p>
-      <p class="text-sm text-gray-600">Restaurant: Example Restaurant</p>
-      <p class="text-sm text-gray-600">Date: 20 Feb 2026</p>
-      <p class="text-sm text-gray-600">Guests: 2</p>
-      <p class="mt-2 font-bold">Total Price: 50DH</p>
+      <p class="text-sm text-gray-600">Restaurant: {{$Reservation->name}}</p>
+      <p class="text-sm text-gray-600">Date: {{$Reservation->date}}</p>
+      <p class="text-sm text-gray-600">Guests: {{$Reservation->amount}}</p>
+      <p class="mt-2 font-bold">Total Price: {{$Reservation->total_price}}DH</p>
     </div>
 
     <!-- Payment Choice -->
     <div class="mb-6">
-      <label class="block font-semibold mb-2">Payment Option</label>
+      <label class="block font-semibold mb-2">Payment Info</label>
+       <p class="text-sm text-gray-600">This Will Be Added To Your Meal Total</p>
 
-      <div class="flex items-center mb-2 gap-2">
-        <input type="radio" name="payment_type" checked />
-        <span>Pay Deposit (30%)</span>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <input type="radio" name="payment_type" />
-        <span>Pay Full Amount</span>
-      </div>
     </div>
 
       <button id="paybutton"
@@ -70,7 +62,7 @@
             <p class="font-semibold">Restaurant Booking</p>
 
             <p class="text-gray-600 mt-2">Amount:</p>
-            <p class="text-2xl font-bold text-green-600">$10.00</p>
+            <p class="text-2xl font-bold text-green-600">{{$Reservation->total_price}} DH</p>
         </div>
 
         <!-- PayPal Button -->
@@ -102,5 +94,6 @@
 
       })
   </script>
+</div>
 </body>
 </html>
