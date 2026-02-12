@@ -8,7 +8,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-
+  @if(session('success'))
+  <div id="success-popup" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-500">
+    ✅  {{session('success')}}
+  </div>
+  @endif
   <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-lg">
     <!-- Restaurant Info -->
     <div class="mb-6">
@@ -58,5 +62,20 @@
   @endforeach
   </div>
 
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const popup = document.getElementById('success-popup');
+
+      // Show the popup
+      popup.classList.remove('opacity-0');
+      popup.classList.add('opacity-100');
+
+      // Hide after 10 seconds
+      setTimeout(() => {
+        popup.classList.remove('opacity-100');
+        popup.classList.add('opacity-0');
+      }, 10000);
+    });
+  </script>
 </body>
 </html>
