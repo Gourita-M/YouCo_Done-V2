@@ -56,7 +56,6 @@ class Role {
 class Reservation {
   -id: int
   -user_id: int
-  -restaurant_id: int
   -date: date
   -time_slot: string
   -status: string
@@ -65,14 +64,12 @@ class Reservation {
 
 class Notification {
   -id: int
-  -restaurant_id: int
   -message: string
   -date_sent: datetime
 }
 
 class Availability {
   -id: int
-  -restaurant_id: int
   -date: date
   -time_slot: string
   -status: string
@@ -80,7 +77,6 @@ class Availability {
 
 class Payment {
   -id: int
-  -reservation_id: int
   -amount: decimal
   -method: string
   -status: string
@@ -103,6 +99,7 @@ User "1.1" -- "1..2" Role
 menu "1.1" -- "0..*" menuplats
 plat "1.1" -- "0..*" menuplats
 Reservation "0..*" -- "1.1" Customer
+Reservation "0..*" -- "1.1" Restaurant
 Availability "0..*" -- "1.1" Restaurant
 Payment "1.1" -- "1.1" Reservation
 Notification "0..*" -- "1.1" Restaurant

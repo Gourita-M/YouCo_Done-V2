@@ -7,6 +7,7 @@ use App\Http\Controllers\PlatsController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservationsController;
+use App\Http\Controllers\PaymentController;
 
 
 Route::get('/', function () {
@@ -59,3 +60,5 @@ Route::post('/AddReservation/{id}',[ReservationsController::class, ('addReservat
   ->middleware(['auth']);
 
 Route::get('/Reserved', [ReservationsController::class, 'showReservations'])->middleware(['auth']);
+
+Route::get('/Payment/{id}',[PaymentController::class, 'index'])->middleware(['auth']);

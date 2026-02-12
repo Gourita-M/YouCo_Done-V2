@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Restaurants;
 use App\Models\Reservations;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 class ReservationsController extends Controller
@@ -33,9 +34,11 @@ class ReservationsController extends Controller
         Reservations::Create([
             'date' => Carbon::now()->toDateString(),
             'time_slot' => $data['timeslot'],
-            'status' => 1,
-            'total_price' => 0,
+            'status' => 0,
+            'total_price' => 50,
             'users_id' => Auth::user()->id,
+            'restaurants_id' => $id,
+            'amount' => $data['amount'],
         ]);
         
         return Redirect('/Reserved');
@@ -44,6 +47,15 @@ class ReservationsController extends Controller
 
     public function showReservations()
     {
-        return View('Reservation.Reserved');
+        $reserved =  DB::table('reservations')
+                    ->join('restaurants', 'reservations.restaurants_id', '=', 'restaurants.id')
+                    ->select('reservations.*','restaurants.name')
+                    ->where('reservations.users_id', Auth::user()->id)->get();
+
+
+        $user = DB::table('users')->find(Auth::user()->id);
+
+        return View('Reservation.Reserved', Compact('reserved'));
     }
+
 }

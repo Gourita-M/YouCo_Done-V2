@@ -10,7 +10,7 @@ uses(RefreshDatabase::class);
 uses(Tests\TestCase::class);
 
 
-test('restaurant can be created', function () {
+it('restaurant can be created', function () {
     $user = User::factory()->create();
 
     $restaurant = Restaurants::create([
@@ -21,7 +21,7 @@ test('restaurant can be created', function () {
         'capacity' => 20,
         'openhours' => '10:00:00',
         'closehours' => '22:00:00',
-        'users_id' => $user->id,
+     
     ]);
 
     expect($restaurant->name)->toBe('Big Baby Ma7laba');

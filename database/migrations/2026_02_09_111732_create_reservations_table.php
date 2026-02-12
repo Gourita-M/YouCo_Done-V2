@@ -17,7 +17,11 @@ return new class extends Migration
             $table->time('time_slot');
             $table->boolean('status');
             $table->decimal('total_price');
+            $table->integer('amount');
             $table->foreignId('users_id')
+                    ->constrained()
+                    ->cascadeOnDelete();
+            $table->foreignId('restaurants_id')
                     ->constrained()
                     ->cascadeOnDelete();
         });

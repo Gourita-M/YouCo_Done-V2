@@ -16,5 +16,7 @@ class Reservations extends Model
         'status',
         'total_price',
         'users_id',
+        'restaurants_id',
+        'amount',
     ];
 }
