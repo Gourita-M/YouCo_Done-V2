@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use App\Models\Reservations;
 
 class PayPalController extends Controller
 {
-    public function createPayment()
+
+    public function createPayment($id)
     {
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $paypalToken = $provider->getAccessToken();
@@ -25,7 +28,7 @@ class PayPalController extends Controller
                 ]
             ],
             "application_context" => [
-                "return_url" => route('paypal.success'),
+                "return_url" => route('paypal.success', ['reservation_id' => $id]),
                 "cancel_url" => route('paypal.cancel'),
             ]
         ]);
@@ -52,11 +55,16 @@ class PayPalController extends Controller
         $response = $provider->capturePaymentOrder($request['token']);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            // Payment successful
+            
+            $reserv = Reservations::Where('id' , $request->reservation_id )
+                        ->update([
+                            'status' => 1 ,
+                        ]);
+
             return redirect('/Reserved')->with('success', 'Payment Completed Successfully!');
            
         } else {
-            return "Payment Failed!";
+            return redirect('/Reserved')->with('success', 'Payment Failed!');
         }
     }
 
