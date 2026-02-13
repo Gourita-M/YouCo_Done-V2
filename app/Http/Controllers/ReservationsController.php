@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Restaurants;
 use App\Models\Reservations;
+use App\Models\Notifications;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -29,8 +30,9 @@ class ReservationsController extends Controller
         $data = $request->validate([
             'amount' => 'required',
             'timeslot' => 'required',
+            'userid' => 'required'
             ]);
-        
+
         Reservations::Create([
             'date' => Carbon::now()->toDateString(),
             'time_slot' => $data['timeslot'],
@@ -39,6 +41,14 @@ class ReservationsController extends Controller
             'users_id' => Auth::user()->id,
             'restaurants_id' => $id,
             'amount' => $data['amount'],
+        ]);
+
+        Notifications::create([
+            'message' => 'New reservation received',
+            'date_sent' => Carbon::now(),
+            'restaurant_id' => $id,
+            'seen' => false,
+            'users_id' => $data['userid'] //of the Restaurant owner
         ]);
         
         return Redirect('/Reserved');
