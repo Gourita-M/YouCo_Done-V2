@@ -69,3 +69,5 @@ Route::get('paypal/success', [App\Http\Controllers\PayPalController::class, 'suc
 Route::get('paypal/cancel', [App\Http\Controllers\PayPalController::class, 'cancel'])->name('paypal.cancel');
 
 Route::post('/Restaurant/Update/{id}', [RestaurantController::class, 'updateRestaurant'])->name('restaurant.update');
+
+Route::get('/availability/{id}', [RestaurantController::class, 'availability']);
