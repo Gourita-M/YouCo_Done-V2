@@ -67,3 +67,5 @@ Route::get('/Payment/{id}',[PaymentController::class, 'index'])->middleware(['au
 Route::get('paypal/pay/{id}', [App\Http\Controllers\PayPalController::class, 'createPayment'])->name('paypal.pay');
 Route::get('paypal/success', [App\Http\Controllers\PayPalController::class, 'success'])->name('paypal.success');
 Route::get('paypal/cancel', [App\Http\Controllers\PayPalController::class, 'cancel'])->name('paypal.cancel');
+
+Route::post('/Restaurant/Update/{id}', [RestaurantController::class, 'updateRestaurant'])->name('restaurant.update');
