@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 use App\Models\Restaurants;
 use App\Models\User;
@@ -95,4 +95,4 @@ Expensive (payments, emails)
 Unpredictable
 Hard to control
 So we replace them with mocks.
- -->
+
