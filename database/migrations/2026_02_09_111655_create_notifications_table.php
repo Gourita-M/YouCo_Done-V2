@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('message');
             $table->dateTime('date_sent');
+            $table->boolean('seen');
             $table->foreignId('restaurant_id')
+                    ->constrained()
+                    ->cascadeOnDelete();
+             $table->foreignId('users_id')
                     ->constrained()
                     ->cascadeOnDelete();
         });
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notification');
+        Schema::dropIfExists('notifications');
     }
 };
