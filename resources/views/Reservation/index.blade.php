@@ -1,3 +1,4 @@
+<?php print_r($data) ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +75,7 @@
 <form method="POST" action="{{Route('add.Reservation', [$data->id])}}" class="space-y-8">
 @csrf
 
+<input name="userid" type="text" value="{{$data->users_id}}" hidden>
 <div>
 <label class="block mb-3 font-semibold">Select Time Slot</label>
 
