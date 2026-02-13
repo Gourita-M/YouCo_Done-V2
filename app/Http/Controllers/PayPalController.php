@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use App\Models\Reservations;
+use App\Models\User;
 
 class PayPalController extends Controller
 {
@@ -60,11 +61,18 @@ class PayPalController extends Controller
                         ->update([
                             'status' => 1 ,
                         ]);
+            $useid = Reservations::Where('id' , $request->reservation_id)->first();
+            
+            $user = User::find($useid->users_id);
+
+            dd($user->id);
 
             return redirect('/Reserved')->with('success', 'Payment Completed Successfully!');
            
         } else {
+
             return redirect('/Reserved')->with('success', 'Payment Failed!');
+       
         }
     }
 
