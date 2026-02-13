@@ -1,12 +1,16 @@
 <?php 
 
 use App\Http\Controllers\RestaurantController;
+use App\Models\Notifications;
 use Illuminate\Support\Facades\Auth;
 
   $Restaurant = new RestaurantController;
 
   $data = $Restaurant->showRestaurantsByUserId(Auth::user()->id);
 
+  $notification = Notifications::where('users_id', Auth::user()->id)
+                                ->where('seen', false)->First();
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,6 +135,25 @@ use Illuminate\Support\Facades\Auth;
 
 </section>
 
+@if($notification && $notification->seen === false)
+<div id="notification"
+     class="fixed top-20 right-6 bg-white shadow-xl rounded-xl p-5 w-80 border border-gray-200 hidden">
+
+    <div class="flex justify-between items-start">
+        <h3 class="font-semibold text-lg">Notification</h3>
+
+        <button onclick="closeNotification()"
+                class="text-gray-400 hover:text-black text-xl">
+            &times;
+        </button>
+    </div>
+
+    <p class="text-gray-600 mt-2">
+        {{$notification->message}}
+    </p>
+</div>
+@endif
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('userMenuBtn');
@@ -162,6 +185,29 @@ use Illuminate\Support\Facades\Auth;
         e.stopPropagation();
       });
     });
+
+  function showNotification() {
+    const el = document.getElementById('notification');
+    el.classList.remove('hidden');
+
+    // Hide after 1 minute (60000 ms)
+    setTimeout(() => {
+        el.classList.add('hidden');
+    }, 60000);
+}
+
+function closeNotification() {
+    document.getElementById('notification').classList.add('hidden');
+}
+
+// Demo auto show
+showNotification();
   </script>
 </body>
 </html>
+<?php 
+
+ if($notification)
+  $notification->update(['seen' => true]); 
+
+?>
