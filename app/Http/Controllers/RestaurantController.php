@@ -82,9 +82,16 @@ class RestaurantController extends Controller
         return Redirect('/dashboard');
     }
 
-    public function editRestaurant()
+    public function editRestaurant($id)
     {
-        return View('Restaurant.editRestaurant');
+        $data = DB::table('restaurants as r')
+                    ->join('menuses as m' , 'm.restaurants_id','=', 'r.id')
+                    ->join('menuplats as mp','mp.menuses_id','=','m.id')
+                    ->join('plats as p', 'p.id','=','mp.plats_id')
+                    ->select('r.*', 'm.*','p.*')
+                    ->where('r.id', $id)
+                    ->get();
+        return View('Restaurant.editRestaurant', Compact('data'));
     }
 
     public function listRestaurants()
