@@ -52,73 +52,21 @@
 
           <div class="md:col-span-2">
             <label for="adress" class="block text-sm font-medium mb-1">Address</label>
-            <input type="text" id="adress" name="adress" value="123 Main Street"
+            <input type="text" id="adress" name="adress" value="{{$data->first()->adress}}"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
           <div>
             <label for="openhours" class="block text-sm font-medium mb-1">Opening Time</label>
-            <input type="time" id="openhours" name="openhours" value="09:00"
+            <input type="time" id="openhours" name="openhours" value="{{$data->first()->openhours}}"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
           <div>
             <label for="closehours" class="block text-sm font-medium mb-1">Closing Time</label>
-            <input type="time" id="closehours" name="closehours" value="23:00"
+            <input type="time" id="closehours" name="closehours" value="{{$data->first()->closehours}}"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
-        </div>
-      </section>
-
-      <section>
-        <h2 class="text-xl font-semibold mb-6">Restaurant Image</h2>
-        <div class="flex items-center gap-6">
-          <img id="imagePreview" src="https://via.placeholder.com/240x160" alt="Restaurant Image"
-               class="w-60 h-40 object-cover rounded-xl border" />
-          <input type="file" id="restImage" name="restuarant_image" accept="image/*"
-                 class="block w-full text-sm text-gray-500
-                        file:mr-4 file:py-2 file:px-4
-                        file:rounded-lg file:border-0
-                        file:bg-orange-500 file:text-white
-                        hover:file:bg-orange-600" />
-        </div>
-      </section>
-
-      <section>
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold">Menu & Plats</h2>
-          <button type="button" id="addPlatBtn"
-                  class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
-            + Add Plat
-          </button>
-        </div>
-
-        <div id="platsContainer" class="space-y-4">
-
-          <div class="border rounded-xl p-4 grid md:grid-cols-4 gap-4 items-center">
-            <input type="text" name="plats[0][name]" placeholder="Plat name" value="Chicken Tajine"
-                   class="border rounded-lg px-3 py-2" required />
-
-            <input type="number" name="plats[0][price]" placeholder="Price" value="45" min="0"
-                   class="border rounded-lg px-3 py-2" required />
-
-            <input type="file" name="plats[0][image]" accept="image/*" class="text-sm text-gray-500" />
-
-            <button type="button" class="removePlatBtn text-red-500 hover:text-red-700 font-semibold">Remove</button>
-          </div>
-
-          <div class="border rounded-xl p-4 grid md:grid-cols-4 gap-4 items-center">
-            <input type="text" name="plats[1][name]" placeholder="Plat name" value="Beef Burger"
-                   class="border rounded-lg px-3 py-2" required />
-
-            <input type="number" name="plats[1][price]" placeholder="Price" value="60" min="0"
-                   class="border rounded-lg px-3 py-2" required />
-
-            <input type="file" name="plats[1][image]" accept="image/*" class="text-sm text-gray-500" />
-
-            <button type="button" class="removePlatBtn text-red-500 hover:text-red-700 font-semibold">Remove</button>
-          </div>
-
         </div>
       </section>
 
@@ -134,50 +82,6 @@
       </div>
     </form>
   </div>
-
-  <script>
-
-    const restImageInput = document.getElementById('restImage');
-    const imagePreview = document.getElementById('imagePreview');
-
-    restImageInput.addEventListener('change', e => {
-      const [file] = e.target.files;
-      if (file) {
-        imagePreview.src = URL.createObjectURL(file);
-      }
-    });
-
-    const addPlatBtn = document.getElementById('addPlatBtn');
-    const platsContainer = document.getElementById('platsContainer');
-
-    let platIndex = 2;
-
-    addPlatBtn.addEventListener('click', () => {
-      const platDiv = document.createElement('div');
-      platDiv.classList.add('border', 'rounded-xl', 'p-4', 'grid', 'md:grid-cols-4', 'gap-4', 'items-center');
-
-      platDiv.innerHTML = `
-        <input type="text" name="plats[${platIndex}][name]" placeholder="Plat name" class="border rounded-lg px-3 py-2" required />
-        <input type="number" name="plats[${platIndex}][price]" placeholder="Price" min="0" class="border rounded-lg px-3 py-2" required />
-        <input type="file" name="plats[${platIndex}][image]" accept="image/*" class="text-sm text-gray-500" />
-        <button type="button" class="removePlatBtn text-red-500 hover:text-red-700 font-semibold">Remove</button>
-      `;
-
-      platsContainer.appendChild(platDiv);
-
-      platIndex++;
-
-      platDiv.querySelector('.removePlatBtn').addEventListener('click', () => {
-        platDiv.remove();
-      });
-    });
-
-    document.querySelectorAll('.removePlatBtn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.target.closest('div').remove();
-      });
-    });
-  </script>
 
 </body>
 </html>
