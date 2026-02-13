@@ -117,6 +117,11 @@ use Illuminate\Support\Facades\Auth;
               Add Menu
             </a>
 
+            <a href="{{ url('addMenu/'.$restaurant->id) }}"
+               class="text-yellow-500 text-sm font-medium">
+              Manage Availability
+            </a>
+
             <a href="{{ url('delete/'.$restaurant->id) }}"
                onclick="return confirm('Are you sure you want to delete this restaurant?')"
                class="text-red-500 text-sm font-medium">
@@ -153,8 +158,29 @@ use Illuminate\Support\Facades\Auth;
     </p>
 </div>
 @endif
+@if(session('success'))
+  <div id="success-popup" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 opacity-0 transition-opacity duration-500">
+    ✅  {{session('success')}}
+  </div>
+@endif
 
 <script>
+
+  window.addEventListener('DOMContentLoaded', () => {
+      const popup = document.getElementById('success-popup');
+
+      // Show the popup
+      popup.classList.remove('opacity-0');
+      popup.classList.add('opacity-100');
+
+      // Hide after 10 seconds
+      setTimeout(() => {
+        popup.classList.remove('opacity-100');
+        popup.classList.add('opacity-0');
+      }, 10000);
+    });
+
+  
     document.addEventListener('DOMContentLoaded', function() {
       const btn = document.getElementById('userMenuBtn');
       const dropdown = document.getElementById('userDropdown');
