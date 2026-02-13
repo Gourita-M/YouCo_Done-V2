@@ -117,7 +117,7 @@ use Illuminate\Support\Facades\Auth;
               Add Menu
             </a>
 
-            <a href="{{ url('addMenu/'.$restaurant->id) }}"
+            <a href="{{ url('availability/'.$restaurant->id) }}"
                class="text-yellow-500 text-sm font-medium">
               Manage Availability
             </a>
