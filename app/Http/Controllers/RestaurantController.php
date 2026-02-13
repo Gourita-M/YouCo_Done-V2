@@ -142,5 +142,21 @@ class RestaurantController extends Controller
 
         return Redirect('/owner/dashboard')->with('success', 'Your Restaurant is Updated');
     }
+
+    public function availability($id)
+    {
+         $data = Restaurants::find($id);
+
+        $open = explode(':', $data->openhours)[0];
+
+        $close = explode(':', $data->closehours)[0];
+
+        return View('Restaurant.Availability', Compact('close','open','data'));
+    }
+
+    public function addAvailability($id)
+    {
+        
+    }
 }
 
