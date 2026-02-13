@@ -1,3 +1,4 @@
+<?php print_r($data) ?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -27,31 +28,25 @@
 
           <div>
             <label for="name" class="block text-sm font-medium mb-1">Restaurant Name</label>
-            <input type="text" id="name" name="name" value="My Restaurant"
+            <input type="text" id="name" name="name" value="{{$data->first()->name}}"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
           <div>
             <label for="city" class="block text-sm font-medium mb-1">City</label>
-            <input type="text" id="city" name="city" value="Casablanca"
+            <input type="text" id="city" name="city" value="{{$data->first()->city}}"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
           <div>
             <label for="cuisine_type" class="block text-sm font-medium mb-1">Cuisine Type</label>
-            <select id="cuisine_type" name="cuisine_type" required
-                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500">
-              <option selected>Moroccan</option>
-              <option>Italian</option>
-              <option>Asian</option>
-              <option>Fast Food</option>
-              <option>French</option>
-            </select>
+            <input type="text" id="cuisine_type" name="cuisine" value="{{$data->first()->cuisine_type}}"
+                   class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
           <div>
             <label for="capacity" class="block text-sm font-medium mb-1">Capacity (Seats)</label>
-            <input type="number" id="capacity" name="capacity" value="40" min="1"
+            <input type="number" id="capacity" name="capacity" value="{{$data->first()->capacity}}" min="1"
                    class="w-full border rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" required />
           </div>
 
