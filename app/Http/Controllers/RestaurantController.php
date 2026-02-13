@@ -62,7 +62,7 @@ class RestaurantController extends Controller
         ]);
         }
 
-        return redirect('/owner/dashboard');
+        return redirect('/owner/dashboard')->with('success', 'Your Restaurant is Added');;
         
     }
 
@@ -118,5 +118,29 @@ class RestaurantController extends Controller
         return View('Restaurant.details', compact('data', 'menuss', 'id'));
     }
 
+    public function updateRestaurant(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:250',
+            'city' => 'required',
+            'cuisine' => 'required',
+            'capacity' => 'required',
+            'adress' => 'required',
+            'openhours' => 'required',
+            'closehours' => 'required',
+        ]);
+
+        Restaurants::where('id', $id)->update([
+            'name' => $validated['name'],
+            'city' => $validated['city'],
+            'cuisine_type' => $validated['cuisine'],
+            'adress' => $validated['adress'],
+            'capacity' => $validated['capacity'],
+            'openhours' => $validated['openhours'],
+            'closehours' => $validated['closehours'],
+        ]);
+
+        return Redirect('/owner/dashboard')->with('success', 'Your Restaurant is Updated');
+    }
 }
 
